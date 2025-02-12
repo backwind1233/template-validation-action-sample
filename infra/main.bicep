@@ -1,5 +1,4 @@
 targetScope = 'subscription'
-
 @minLength(1)
 @maxLength(64)
 @description('Name of the environment that can be used as part of naming resource convention')
@@ -8,13 +7,6 @@ param environmentName string
 @minLength(1)
 @description('Primary location for all resources')
 param location string
-
-param templateValidationActionSampleExists bool
-@secure()
-param templateValidationActionSampleDefinition object
-
-@description('Id of the user or app to assign application roles')
-param principalId string
 
 // Tags that should be applied to all resources.
 // 
@@ -38,12 +30,7 @@ module resources 'resources.bicep' = {
   params: {
     location: location
     tags: tags
-    principalId: principalId
-    templateValidationActionSampleExists: templateValidationActionSampleExists
-    templateValidationActionSampleDefinition: templateValidationActionSampleDefinition
   }
 }
-output AZURE_CONTAINER_REGISTRY_ENDPOINT string = resources.outputs.AZURE_CONTAINER_REGISTRY_ENDPOINT
-output AZURE_KEY_VAULT_ENDPOINT string = resources.outputs.AZURE_KEY_VAULT_ENDPOINT
-output AZURE_KEY_VAULT_NAME string = resources.outputs.AZURE_KEY_VAULT_NAME
-output AZURE_RESOURCE_TEMPLATE_VALIDATION_ACTION_SAMPLE_ID string = resources.outputs.AZURE_RESOURCE_TEMPLATE_VALIDATION_ACTION_SAMPLE_ID
+output AZURE_AKS_CLUSTER_NAME string = resources.outputs.AZURE_AKS_CLUSTER_NAME
+output AZURE_RESOURCE_GROUP string = rg.name

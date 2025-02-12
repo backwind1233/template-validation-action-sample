@@ -4,7 +4,17 @@ name: template-validation-action-sample
 metadata:
     template: azd-init@1.11.0
 services:
-    template-validation-action-sample:
-        project: .
-        host: containerapp
-        language: java
+    jupyterhub:
+        host: aks
+        k8s:
+            namespace: jupyterhub
+            service:
+                name: proxy-public
+            helm:
+                repositories:
+                    - name: jupyterhub
+                      url: https://hub.jupyter.org/helm-chart/
+                releases:
+                    - name: jupyterhub
+                      chart: jupyterhub/jupyterhub
+                      version: 3.1.0
